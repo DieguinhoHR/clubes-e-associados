@@ -2,6 +2,7 @@
 <html lang="pt-br">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Clubes e Associados</title>
 
@@ -20,5 +21,6 @@
                 @include('partials.footer')
             </footer>
         </div>
+        <script src="/js/app.js"></script>
     </body>
 </html>
