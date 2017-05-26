@@ -9,13 +9,13 @@
         <table class="table table table-striped table-hover">
             <thead>
                 <th>ID:</th>
-                <th>Nome do Clube:</th>
+                <th>Nome</th>
                 <th>Ações:</th>
                 <th colspan="2"></th>
             </thead>
 
             <tbody>
-                <tr v-for="clube in clubes">
+                <tr v-for="clube in list">
                     <td>{{ clube.id }}</td>
                     <td>{{ clube.nome }}</td>
                     <td>
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+    import { orderBy } from 'lodash'
+
     export default {
         data() {
           return {
@@ -37,8 +39,13 @@
           }
         },
         props: ['clubesProp'],
-        mounted() {
-            this.clubes = JSON.parse(this.clubesProp)
+        computed: {
+            list() {
+                this.clubes = JSON.parse(this.clubesProp)
+
+                return orderBy(this.clubes, 'id')
+            }
+
         },
-    }
+   }
 </script>

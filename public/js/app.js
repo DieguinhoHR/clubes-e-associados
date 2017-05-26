@@ -766,8 +766,9 @@ module.exports = g;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -1644,6 +1645,8 @@ module.exports = function spread(callback) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
 //
 //
 //
@@ -1675,6 +1678,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -1684,15 +1689,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     props: ['clubesProp'],
-    mounted: function mounted() {
-        this.clubes = JSON.parse(this.clubesProp);
+    computed: {
+        list: function list() {
+            this.clubes = JSON.parse(this.clubesProp);
+
+            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["orderBy"])(this.clubes, 'id');
+        }
     }
 });
 
 /***/ }),
 /* 29 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 
 window._ = __webpack_require__(32);
 
@@ -31759,7 +31769,7 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_vm._m(0), _vm._v(" "), _c('hr'), _vm._v(" "), _c('table', {
     staticClass: "table table table-striped table-hover"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.clubes), function(clube) {
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.list), function(clube) {
     return _c('tr', [_c('td', [_vm._v(_vm._s(clube.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(clube.nome))]), _vm._v(" "), _vm._m(2, true)])
   }))])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -31767,7 +31777,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "glyphicon glyphicon-sort-by-alphabet"
   }), _vm._v(" Clubes\n    ")])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('th', [_vm._v("ID:")]), _vm._v(" "), _c('th', [_vm._v("Nome do Clube:")]), _vm._v(" "), _c('th', [_vm._v("Ações:")]), _vm._v(" "), _c('th', {
+  return _c('thead', [_c('th', [_vm._v("ID:")]), _vm._v(" "), _c('th', [_vm._v("Nome")]), _vm._v(" "), _c('th', [_vm._v("Ações:")]), _vm._v(" "), _c('th', {
     attrs: {
       "colspan": "2"
     }
