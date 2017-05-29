@@ -4,6 +4,10 @@
             <span class="glyphicon glyphicon-sort-by-alphabet"></span> Clubes
         </h4>
 
+        <div class="well">
+            <input type="text" class="form-control" placholder="Filtrar a lista abaixo" v-model="filterTerm">
+        </div>
+
         <hr>
 
         <table class="table table table-striped table-hover">
@@ -15,11 +19,11 @@
             </thead>
 
             <tbody>
-                <tr v-for="clube in list">
-                    <td>{{ clube.id }}</td>
-                    <td>{{ clube.nome }}</td>
+                <tr v-for="clube in clubes">
+                    <td v-text="clube.id"></td>
+                    <td v-text="clube.nome"></td>
                     <td>
-                        <button type="submit" class="btn btn-danger">
+                        <button type="submit" class="btn btn-danger" @click.prevent="onDelete(clube)">
                             Excluir
                         </button>
                     </td>
@@ -31,21 +35,33 @@
 
 <script>
     import { orderBy } from 'lodash'
+    import axios from 'axios'
 
     export default {
         data() {
           return {
               clubes:[],
+              filterTerm: ''
           }
         },
         props: ['clubesProp'],
-        computed: {
-            list() {
-                this.clubes = JSON.parse(this.clubesProp)
 
-                return orderBy(this.clubes, 'id')
+        methods: {
+            onSave(clube) {
+              console.log('saved')
+            },
+            onDelete(clube) {
+                axios.delete('/clubes/' + clube.id, clube)
+                     .then((response) =>
+                         this.clubes.splice(clube, 1))
+                     .catch((respose) => alert('Nenhuma registro encontrado'))
+
             }
+        },
+        mounted () {
+            this.clubes = JSON.parse(this.clubesProp)
 
+            return orderBy(this.clubes, 'id')
         },
    }
 </script>

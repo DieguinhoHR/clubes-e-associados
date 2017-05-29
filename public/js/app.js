@@ -766,9 +766,8 @@ module.exports = g;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -1647,6 +1646,8 @@ module.exports = function spread(callback) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
 //
 //
 //
@@ -1678,31 +1679,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            clubes: []
+            clubes: [],
+            filterTerm: ''
         };
     },
 
     props: ['clubesProp'],
-    computed: {
-        list: function list() {
-            this.clubes = JSON.parse(this.clubesProp);
 
-            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["orderBy"])(this.clubes, 'id');
+    methods: {
+        onDelete: function onDelete(clube) {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_1_axios___default.a.delete('/clubes/' + clube.id, clube).then(function (response) {
+                return _this.clubes.splice(clube, 1);
+            }).catch(function (respose) {
+                return alert('Nenhuma registro encontrado');
+            });
         }
+    },
+    mounted: function mounted() {
+
+        this.clubes = JSON.parse(this.clubesProp);
+
+        return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_lodash__["orderBy"])(this.clubes, 'id');
     }
 });
 
 /***/ }),
 /* 29 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
 
 window._ = __webpack_require__(32);
 
@@ -31767,10 +31784,52 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_vm._m(0), _vm._v(" "), _c('hr'), _vm._v(" "), _c('table', {
+  return _c('div', [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "well"
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.filterTerm),
+      expression: "filterTerm"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "placholder": "Filtrar a lista abaixo"
+    },
+    domProps: {
+      "value": (_vm.filterTerm)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.filterTerm = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('table', {
     staticClass: "table table table-striped table-hover"
-  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.list), function(clube) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(clube.id))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(clube.nome))]), _vm._v(" "), _vm._m(2, true)])
+  }, [_vm._m(1), _vm._v(" "), _c('tbody', _vm._l((_vm.clubes), function(clube) {
+    return _c('tr', [_c('td', {
+      domProps: {
+        "textContent": _vm._s(clube.id)
+      }
+    }), _vm._v(" "), _c('td', {
+      domProps: {
+        "textContent": _vm._s(clube.nome)
+      }
+    }), _vm._v(" "), _c('td', [_c('button', {
+      staticClass: "btn btn-danger",
+      attrs: {
+        "type": "submit"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.onDelete(clube)
+        }
+      }
+    }, [_vm._v("\n                        Excluir\n                    ")])])])
   }))])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('h4', [_c('span', {
@@ -31782,13 +31841,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "colspan": "2"
     }
   })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('td', [_c('button', {
-    staticClass: "btn btn-danger",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("\n                        Excluir\n                    ")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {

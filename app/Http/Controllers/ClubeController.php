@@ -37,10 +37,8 @@ class ClubeController extends Controller
 
     public function destroy($id)
     {
-        $this->clubeRepository->deletar($id);
+        $clube = $this->clubeRepository->deletar($id);
 
-        \Session::flash('flash_message_delete','Registro excluido com sucesso!');
-
-        return redirect('clubes');
+        return response()->json($clube);
     }
 }
