@@ -15,7 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('clube', require('./components/Clube.vue'));
+Vue.component('clube', require('./components/Clube.vue'))
+Vue.component('message', require('./components/Message.vue'))
 
 const app = new Vue({
     el: '.container'
