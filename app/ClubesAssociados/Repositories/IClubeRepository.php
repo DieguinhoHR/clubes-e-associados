@@ -9,4 +9,5 @@ interface IClubeRepository
     public function listaClubesEmOrdemAlfabetica();
     public function salvar(ClubeRequest $request);
     public function deletar($id);
+    public function search($nome);
 }

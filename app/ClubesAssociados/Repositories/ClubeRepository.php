@@ -21,4 +21,9 @@ class ClubeRepository implements IClubeRepository
     {
         return Clube::find($id)->delete();
     }
+
+    public function search($nome)
+    {
+        return Clube::where('nome', 'LIKE', '%$nome%');
+    }
 }
