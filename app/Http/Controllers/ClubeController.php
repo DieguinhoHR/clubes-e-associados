@@ -21,26 +21,24 @@ class ClubeController extends Controller
         return view('clubes.index', compact('clubes'));
     }
 
-    public function create()
+    public function search($nome)
     {
-        return view('clubes.create');
+        $clube = $this->clubeRepository->search($nome);
+
+        return response()->json(['model' => $clube]);
     }
 
     public function store(ClubeRequest $request)
     {
         $this->clubeRepository->salvar($request);
 
-        $request->session()->flash('flash_message', 'Registro inserido com sucesso!');
-
-        return redirect('clubes');
+        return ['message' => 'Registro inserido com sucesso'];
     }
 
     public function destroy($id)
     {
-        $this->clubeRepository->deletar($id);
+        $clube = $this->clubeRepository->deletar($id);
 
-        \Session::flash('flash_message_delete','Registro excluido com sucesso!');
-
-        return redirect('clubes');
+        return response()->json($clube);
     }
 }
