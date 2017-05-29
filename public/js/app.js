@@ -18789,7 +18789,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             clubes: [],
             nome: '',
-            search: ''
+            search: '',
+            model: {}
         };
     },
 
@@ -18802,7 +18803,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/clubes/' + this.search).then(function (response) {
                 return _this.clubes = response.data.model.data;
             }).catch(function (respose) {
-                return alert('Nenhuma registro encontrado');
+                return _this.clubes = JSON.parse(_this.clubesProp);
             });
         },
         onSave: function onSave() {

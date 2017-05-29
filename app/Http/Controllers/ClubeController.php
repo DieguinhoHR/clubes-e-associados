@@ -25,7 +25,7 @@ class ClubeController extends Controller
     {
         $clube = $this->clubeRepository->search($nome);
 
-        return ['clube', $clube];
+        return response()->json(['model' => $clube]);
     }
 
     public function store(ClubeRequest $request)

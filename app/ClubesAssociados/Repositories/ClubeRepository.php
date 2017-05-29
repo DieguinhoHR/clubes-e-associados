@@ -24,6 +24,6 @@ class ClubeRepository implements IClubeRepository
 
     public function search($nome)
     {
-        return Clube::where('nome', 'LIKE', '%$nome%');
+        return Clube::where('nome', 'LIKE', "%$nome%")->paginate(5);
     }
 }

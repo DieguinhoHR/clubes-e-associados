@@ -49,7 +49,8 @@
           return {
               clubes:[],
               nome: '',
-              search: ''
+              search: '',
+              model: {},
           }
         },
         props: ['clubesProp'],
@@ -59,7 +60,7 @@
               axios.get('/clubes/' + this.search)
                    .then((response) =>
                        this.clubes = response.data.model.data)
-                   .catch((respose) => alert('Nenhuma registro encontrado'))
+                   .catch((respose) => this.clubes = JSON.parse(this.clubesProp))
             },
             onSave() {
               axios.post('/clubes', {
@@ -78,8 +79,6 @@
         },
         mounted () {
             this.clubes = JSON.parse(this.clubesProp)
-
-
         },
    }
 </script>
